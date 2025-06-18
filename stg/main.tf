@@ -14,8 +14,11 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "example" {
-  bucket        = "example-bucket-${terraform.workspace}"
+  bucket        = "tfc-demo-${var.env}"
   force_destroy = true
+  tags = {
+    Environment = var.env
+  }
 }
 
 output "bucket_name" {
