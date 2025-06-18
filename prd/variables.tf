@@ -6,7 +6,10 @@ variable "region" {
 variable "env" {
   type    = string
   default = "prd"  # ← stg/prdではそれぞれ変更
+
 }
+
+
 
 
 
