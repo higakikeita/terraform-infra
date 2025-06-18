@@ -1,12 +1,5 @@
 terraform {
-  required_version = ">= 1.5.0"
-
-  backend "remote" {
-    organization = "higakikeita-org"  # Terraform CloudのOrganization名に変更
-    workspaces {
-      name = "example-prd"
-    }
-  }
+  required_version = ">= 1.12.2"
 }
 
 provider "aws" {
@@ -14,10 +7,11 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "example" {
-  bucket        = "example-bucket-${terraform.workspace}"
+  bucket        = "tfc-demo-${var.env}"
   force_destroy = true
+
+  tags = {
+    Environment = var.env
+  }
 }
 
-output "bucket_name" {
-  value = aws_s3_bucket.example.id
-}
